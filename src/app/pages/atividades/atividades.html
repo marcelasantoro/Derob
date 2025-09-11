@@ -1,0 +1,131 @@
+<section class="container my-5" aria-labelledby="titulo-atividades">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <h2 id="titulo-atividades" class="section-title mb-4">📚 Atividades</h2>
+      <p class="lead">Filtre por tipo e participantes e clique em <strong>Buscar</strong>.</p>
+
+
+      <!-- Filtros -->
+      <div class="filter-section mb-5">
+        <form (ngSubmit)="buscar()" class="row g-3 align-items-end">
+          <div class="col-md-5">
+            <label class="form-label">Tipo:</label>
+            <select class="form-select" [(ngModel)]="tipo" name="tipo">
+              <option value="">Todos os tipos</option>
+              <option value="education">Educação</option>
+              <option value="recreational">Recreação</option>
+              <option value="social">Social</option>
+              <option value="charity">Caridade</option>
+              <option value="cooking">Culinária</option>
+              <option value="relaxation">Relaxamento</option>
+              <option value="busywork">Faça-você-mesmo</option>
+              <option value="music">Música</option>
+            </select>
+          </div>
+
+
+          <div class="col-md-5">
+            <label class="form-label">Participantes:</label>
+            <select class="form-select" [(ngModel)]="participantes" name="participantes">
+              <option value="">Qualquer número</option>
+              <option [value]="1">1</option>
+              <option [value]="2">2</option>
+              <option [value]="3">3</option>
+              <option [value]="4">4</option>
+              <option [value]="5">5</option>
+              <option [value]="6">6</option>
+              <option [value]="8">8</option>
+            </select>
+          </div>
+
+
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-derob w-100" [disabled]="carregando">
+              <span *ngIf="!carregando">Buscar</span>
+              <span *ngIf="carregando">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+
+      <!-- Estados -->
+      <div *ngIf="carregando" class="text-center py-5">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+          <span class="visually-hidden">Carregando...</span>
+        </div>
+        <p class="mt-3">Carregando sugestão...</p>
+      </div>
+     
+      <div *ngIf="erro" class="alert alert-danger text-center" role="alert">
+        ❌ Falha ao buscar. Tente novamente.
+      </div>
+
+
+      <!-- Card único -->
+      <article *ngIf="!carregando && !erro && atividade" class="card-derob activity-card mx-auto">
+        <img [src]="imagemTipo(atividade.type)" [alt]="'Imagem ilustrativa de ' + rotuloTipo(atividade.type)"
+             class="activity-image card-img-top">
+        <div class="activity-content card-body">
+          <h3 class="activity-title card-title">{{ atividade.activity }}</h3>
+         
+          <div class="activity-meta">
+            <div class="activity-meta-item">
+              <i class="fas fa-tag"></i>
+              <span class="badge-derob">{{ rotuloTipo(atividade.type) }}</span>
+            </div>
+            <div class="activity-meta-item">
+              <i class="fas fa-users"></i>
+              <span>{{ atividade.participants }} participante(s)</span>
+            </div>
+            <div class="activity-meta-item">
+              <i class="fas fa-universal-access"></i>
+              <span>{{ acessLabel(atividade.accessibility) }}</span>
+            </div>
+            <div class="activity-meta-item">
+              <i class="fas fa-dollar-sign"></i>
+              <span>{{ precoLabel(atividade.price) }}</span>
+            </div>
+          </div>
+
+
+          <a *ngIf="atividade.link" [href]="atividade.link" target="_blank" rel="noopener"
+             class="btn btn-outline-primary mt-3">
+            <i class="fas fa-external-link-alt me-2"></i> Saiba mais
+          </a>
+        </div>
+      </article>
+
+
+      <div class="text-center mt-5" *ngIf="!carregando && !erro && atividade">
+        <button class="btn btn-derob" (click)="buscar()">
+          <i class="fas fa-sync-alt me-2"></i> Buscar outra atividade
+        </button>
+      </div>
+
+
+      <!-- Meme do The Office -->
+      <div class="row mt-5" *ngIf="!carregando && !erro && atividade">
+        <div class="col-12">
+          <div class="card-derob p-3">
+            <div class="row align-items-center">
+              <div class="col-md-3">
+                <img src="https://i.pinimg.com/736x/79/23/38/7923384b8a17556907fdcb35996d21d6.jpg"
+                     alt="Michael Scott - Why are you the way that you are" class="img-fluid rounded-3">
+              </div>
+              <div class="col-md-9">
+                <p class="mb-0 fst-italic">"“Não se trata de ganhar ou perder.”</p>
+                <p class="mb-0 fst-italic">“Se trata de enganar todo mundo para pensar que você ganhou.”</p>
+                <p class="mb-0 fst-italic">“E depois sair mais cedo para comer sorvete."</p>
+                <p class="mt-2 text-end text-muted">- Michael Scott, The Office</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
