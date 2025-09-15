@@ -4,7 +4,7 @@ import { SobreComponent } from './pages/sobre/sobre';
 import { AtividadesComponent } from './pages/atividades/atividades';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, title: 'Tédio Zero - Home' },
-  { path: 'sobre', component: SobreComponent, title: 'Tédio Zero - Sobre' },
-  { path: 'atividades', component: AtividadesComponent, title: 'Tédio Zero - Atividades' }
+  { path: '', component: HomeComponent, title: 'Derob - Home' },
+  { path: 'sobre', component: SobreComponent, title: 'Derob - About' },
+  { path: 'atividades', component: AtividadesComponent, title: 'Derob - Activities' }
 ];

@@ -43,59 +43,59 @@ export class AtividadesComponent {
 
   constructor(private service: AtividadesService) {}
 
-  // Informações detalhadas sobre cada categoria
+  // Detailed information about each category
   private readonly infoCategorias: Record<TipoChave, CategoriaInfo> = {
     education: {
-      nome: 'Educação',
+      nome: 'Education',
       icone: 'fas fa-graduation-cap',
-      descricao: 'Aprenda algo novo e expanda seus conhecimentos',
-      citacao: '"Às vezes, eu começo uma frase e não sei onde vou chegar. Assim como um político, mas eu termino com mais pontos."'
+      descricao: 'Learn something new and expand your knowledge',
+      citacao: '"Sometimes I start a sentence and I don’t even know where it’s going. Like a politician, but I finish with more points."'
     },
     recreational: {
-      nome: 'Recreação',
+      nome: 'Recreation',
       icone: 'fas fa-gamepad',
-      descricao: 'Diversão e jogos para relaxar e se divertir',
-      citacao: '"Eu não sou supersticioso, mas sou um pouco sticioso."'
+      descricao: 'Fun and games to relax and enjoy yourself',
+      citacao: '"I’m not superstitious, but I am a little stitious."'
     },
     social: {
       nome: 'Social',
       icone: 'fas fa-users',
-      descricao: 'Atividades para fazer com amigos ou conhecer novas pessoas',
-      citacao: '"Eu sou amigo de todo mundo neste escritório. Somos todos melhores amigos."'
+      descricao: 'Activities to do with friends or meet new people',
+      citacao: '"I am friends with everybody in this office. We’re all best friends."'
     },
     charity: {
-      nome: 'Caridade',
+      nome: 'Charity',
       icone: 'fas fa-hand-holding-heart',
-      descricao: 'Ações que beneficiam outras pessoas e a comunidade',
-      citacao: '"A melhor maneira de se livrar da dor é dar um presente para alguém."'
+      descricao: 'Actions that benefit other people and the community',
+      citacao: '"The best way to get rid of pain is to give someone a gift."'
     },
     cooking: {
-      nome: 'Culinária',
+      nome: 'Cooking',
       icone: 'fas fa-utensils',
-      descricao: 'Receitas e experiências gastronômicas deliciosas',
-      citacao: '"Meu molho é o melhor do mundo. Minha avó me passou a receita."'
+      descricao: 'Recipes and delicious gastronomic experiences',
+      citacao: '"My sauce is the best in the world. My grandmother passed down the recipe."'
     },
     relaxation: {
-      nome: 'Relaxamento',
+      nome: 'Relaxation',
       icone: 'fas fa-spa',
-      descricao: 'Atividades para acalmar a mente e reduzir o estresse',
-      citacao: '"Estresse é basicamente uma falta de compreensão da forma como as coisas funcionam."'
+      descricao: 'Activities to calm the mind and reduce stress',
+      citacao: '"Stress is basically a lack of understanding of how things work."'
     },
     busywork: {
-      nome: 'Faça Você Mesmo',
+      nome: 'Do It Yourself',
       icone: 'fas fa-tools',
-      descricao: 'Projetos manuais e atividades práticas',
-      citacao: '"Por que usar muitas palavras quando poucas palavras funcionam?"'
+      descricao: 'Manual projects and practical activities',
+      citacao: '"Why use many word when few word do trick?"'
     },
     music: {
-      nome: 'Música',
+      nome: 'Music',
       icone: 'fas fa-music',
-      descricao: 'Atividades musicais para todos os gostos',
-      citacao: '"Eu canto no chuveiro. Às vezes passo tanto tempo cantando que esqueço de me lavar."'
+      descricao: 'Musical activities for all tastes',
+      citacao: '"I sing in the shower. Sometimes I spend so much time singing that I forget to wash myself."'
     }
   };
 
-  // Imagens locais para cada categoria
+  // Local images for each category
   private readonly imagens: Record<TipoChave, string> = {
     education: 'assets/atividades/education.jpg',
     recreational: 'assets/atividades/recreational.jpg',
@@ -107,7 +107,7 @@ export class AtividadesComponent {
     music: 'assets/atividades/music.jpg'
   };
 
-  // Imagens de fallback caso as locais não carreguem
+  // Fallback images
   private readonly imagensFallback: Record<TipoChave, string> = {
     education: 'https://cdn.wallpapersafari.com/0/13/elsBJw.jpg',
     recreational: 'https://en.idei.club/uploads/posts/2023-06/thumbs/1687178027_en-idei-club-p-michael-scott-dizain-pinterest-53.jpg',
@@ -121,7 +121,7 @@ export class AtividadesComponent {
 
   rotuloTipo(tipo: string): string {
     const key = (tipo?.toLowerCase() as TipoChave) || 'recreational';
-    return this.infoCategorias[key]?.nome || 'Recreação';
+    return this.infoCategorias[key]?.nome || 'Recreation';
   }
 
   imagemTipo(tipo: string): string {
@@ -129,7 +129,6 @@ export class AtividadesComponent {
     return this.imagens[key] || this.imagens.recreational;
   }
 
-  // Método para lidar com erro de carregamento de imagem
   handleImageError(event: any, tipo: string) {
     const key = (tipo?.toLowerCase() as TipoChave) || 'recreational';
     event.target.src = this.imagensFallback[key];
@@ -142,21 +141,21 @@ export class AtividadesComponent {
 
   citacaoTipo(tipo: string): string {
     const key = (tipo?.toLowerCase() as TipoChave) || 'recreational';
-    return this.infoCategorias[key]?.citacao || '"Às vezes você precisa se divertir um pouco."';
+    return this.infoCategorias[key]?.citacao || '"Sometimes you just need to have a little fun."';
   }
 
   precoLabel(price: number): string {
-    if (price === 0) return 'Grátis';
-    if (price <= 0.3) return 'Baixo Custo';
-    if (price <= 0.6) return 'Custo Moderado';
-    return 'Alto Custo';
+    if (price === 0) return 'Free';
+    if (price <= 0.3) return 'Low Cost';
+    if (price <= 0.6) return 'Moderate Cost';
+    return 'High Cost';
   }
 
   acessLabel(accessibility: number): string {
-    if (accessibility <= 0.25) return 'Muito Acessível';
-    if (accessibility <= 0.5) return 'Acessível';
-    if (accessibility <= 0.75) return 'Moderadamente Acessível';
-    return 'Pouco Acessível';
+    if (accessibility <= 0.25) return 'Very Accessible';
+    if (accessibility <= 0.5) return 'Accessible';
+    if (accessibility <= 0.75) return 'Moderately Accessible';
+    return 'Hardly Accessible';
   }
 
   buscar(): void {
@@ -170,7 +169,7 @@ export class AtividadesComponent {
 
     this.service.getActivitiesByFilter(tipoFinal, participantesNum).subscribe({
       next: (lista: any[]) => {
-        console.log('✅ Resposta da API:', lista);
+        console.log('✅ API Response:', lista);
         if (!lista?.length) {
           this.erro = true;
           this.carregando = false;
@@ -181,14 +180,13 @@ export class AtividadesComponent {
         this.carregando = false;
       },
       error: (err) => {
-        console.error('❌ Erro de requisição:', err);
+        console.error('❌ Request Error:', err);
         this.erro = true;
         this.carregando = false;
       },
     });
   }
 
-  // Método para selecionar uma categoria específica
   selecionarCategoria(categoria: TipoChave): void {
     this.tipo = categoria;
     this.buscar();
